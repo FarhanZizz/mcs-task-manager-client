@@ -4,6 +4,7 @@ import MainLayout from "./Layout/MainLayout"
 import Login from "./Pages/Login"
 import Signup from "./Pages/Signup"
 import Tasks from "./Pages/Tasks"
+import { Toaster } from "react-hot-toast"
 
 function App() {
   const router = createBrowserRouter([
@@ -34,6 +35,7 @@ function App() {
   return (
     <div className="p-2 md:p-6">
       <RouterProvider router={router}></RouterProvider>
+      <Toaster />
     </div>
   )
 }

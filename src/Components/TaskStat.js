@@ -1,16 +1,39 @@
 import React from "react"
 import { useFormik } from "formik"
 import * as Yup from "yup"
+import { toast } from "react-hot-toast"
 
-const TaskStat = ({ user }) => {
+const TaskStat = ({ user, refetch, tasks }) => {
+  const completed = tasks.filter((task) => task.status === true)
+  const completedPercentage = (completed.length / tasks.length) * 100
+
   const validationSchema = Yup.object().shape({
     title: Yup.string().required("Title is required"),
     message: Yup.string().required("Description is required"),
   })
 
-  const taskAddHandler = (values) => {
-    console.log("Clicked", values)
-    closeModal()
+  const taskAddHandler = (values, { resetForm }) => {
+    const newTask = {
+      title: values.title,
+      description: values.message,
+      uid: user.uid,
+    }
+    const modal = document.getElementById("add_task")
+
+    fetch("https://mcs-task-management-server.vercel.app/add-task", {
+      method: "POST",
+      headers: {
+        "Content-Type": "Application/json",
+      },
+      body: JSON.stringify(newTask),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        toast.success("Data Successfully Added")
+        refetch()
+        modal.checked = false
+        resetForm()
+      })
   }
 
   const formik = useFormik({
@@ -21,11 +44,6 @@ const TaskStat = ({ user }) => {
     validationSchema: validationSchema,
     onSubmit: taskAddHandler,
   })
-
-  function closeModal() {
-    const modal = document.getElementById("add_task")
-    modal.close()
-  }
 
   return (
     <div className="stats stats-vertical lg:stats-horizontal shadow">
@@ -46,7 +64,9 @@ const TaskStat = ({ user }) => {
           </svg>
         </div>
         <div className="stat-title">Remaining</div>
-        <div className="stat-value text-2xl text-neutral">31 Tasks</div>
+        <div className="stat-value text-2xl text-neutral">
+          {tasks.length} Tasks
+        </div>
       </div>
 
       <div className="stat">
@@ -72,7 +92,9 @@ const TaskStat = ({ user }) => {
             </div>
           </div>
         )}
-        <div className="stat-value">86%</div>
+        <div className="stat-value">
+          {completedPercentage ? completedPercentage.toFixed(0) : 100}%
+        </div>
         <div className="stat-title">Tasks done</div>
       </div>
 
