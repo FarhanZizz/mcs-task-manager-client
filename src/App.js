@@ -32,7 +32,7 @@ function App() {
     },
   ])
   return (
-    <div className="p-6">
+    <div className="p-2 md:p-6">
       <RouterProvider router={router}></RouterProvider>
     </div>
   )

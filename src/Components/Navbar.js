@@ -7,14 +7,14 @@ const Navbar = () => {
 
   const navigate = useNavigate()
   return (
-    <div className="navbar bg-base-100">
+    <div className="navbar ">
       <div className="flex-1">
         <Link to="/" className="btn btn-ghost text-accent normal-case text-3xl">
           MCS
         </Link>
       </div>
       <div className="flex-none">
-        <ul className="menu menu-horizontal md:gap-20 px-1">
+        <ul className="menu menu-horizontal gap-5 md:gap-20 px-1">
           <NavLink
             className={({ isActive }) =>
               isActive
