@@ -5,6 +5,7 @@ import Login from "./Pages/Login"
 import Signup from "./Pages/Signup"
 import Tasks from "./Pages/Tasks"
 import { Toaster } from "react-hot-toast"
+import PrivateRoute from "./Components/PrivateRoute"
 
 function App() {
   const router = createBrowserRouter([
@@ -27,7 +28,11 @@ function App() {
 
         {
           path: "/tasks",
-          element: <Tasks />,
+          element: (
+            <PrivateRoute>
+              <Tasks />
+            </PrivateRoute>
+          ),
         },
       ],
     },

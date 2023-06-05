@@ -21,7 +21,7 @@ const Hero = () => {
             solution for efficient task management. Stay organized, focused, and
             in control of your daily responsibilities with ease.
           </p>
-          <Link to="/" className="btn btn-accent">
+          <Link to="/tasks" className="btn btn-accent">
             Get Started
           </Link>
         </div>
