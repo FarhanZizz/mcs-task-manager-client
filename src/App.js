@@ -3,6 +3,7 @@ import Home from "./Pages/Home"
 import MainLayout from "./Layout/MainLayout"
 import Login from "./Pages/Login"
 import Signup from "./Pages/Signup"
+import Tasks from "./Pages/Tasks"
 
 function App() {
   const router = createBrowserRouter([
@@ -21,6 +22,11 @@ function App() {
         {
           path: "/signup",
           element: <Signup />,
+        },
+
+        {
+          path: "/tasks",
+          element: <Tasks />,
         },
       ],
     },
